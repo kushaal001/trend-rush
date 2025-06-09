@@ -1,4 +1,4 @@
-import ProductsPage from '@/components/sideBar/Products'
+import ProductsPage from '@/components/sideBar/catalog/Products'
 import React from 'react'
 
 export default function page() {

@@ -1,10 +1,10 @@
-import ProductsTable from '@/components/sideBar/catalog/Products'
+import SubscribersTable from '@/components/sideBar/home/SubscribersTable'
 import React from 'react'
 
 export default function page() {
   return (
     <div>
-        <ProductsTable />
+<SubscribersTable />
     </div>
   )
 }
