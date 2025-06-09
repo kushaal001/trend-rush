@@ -1,10 +1,10 @@
 "use client";
 
 
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { LockKeyhole, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 
 export default function Header() {
@@ -26,12 +26,13 @@ export default function Header() {
   };
 
   return (
-    <div className="w-full primary-color h-14 bg-[var(--primary_color)] text-white  flex justify-between items-center fixed top-0 left-0 right-0 z-[999]">
+    <div className="w-full bg-[#f2f2f2] shadow-xs primary-color h-14 text-black  flex justify-between items-center fixed top-0 left-0 right-0 z-[999]">
       <div className="flex items-center justify-start  border-none px-4 text-xl ">
-        <img src="/cream-logo.png" alt="" className=" w-[100px]" />
+        {/* <img src="/cream-logo.png" alt="" className=" w-[100px]" /> */}
+         <div className="text-xl text-black font-bold text-center ">TRENDRUSH</div>
       </div>
       <div className="flex items-center p-2 gap-2">
-        <DropdownMenu>
+        <DropdownMenu > 
           <DropdownMenuTrigger>{renderName()}</DropdownMenuTrigger>
           <DropdownMenuContent style={{
               boxShadow: `

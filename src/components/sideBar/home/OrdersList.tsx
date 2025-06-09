@@ -2,27 +2,28 @@
 import React, { useState } from "react";
 
 const mockOrders = [
-  { id: 1, orderNo: "ORD001", customer: "John Doe", status: "Shipped", date: "2025-06-08" },
-  { id: 2, orderNo: "ORD002", customer: "Alice Smith", status: "Pending", date: "2025-06-07" },
-  { id: 3, orderNo: "ORD003", customer: "Bob Johnson", status: "Delivered", date: "2025-06-06" },
-  { id: 4, orderNo: "ORD004", customer: "Emma Brown", status: "Pending", date: "2025-06-05" },
-  { id: 5, orderNo: "ORD005", customer: "Liam Davis", status: "Shipped", date: "2025-06-04" },
-  { id: 6, orderNo: "ORD006", customer: "Olivia Wilson", status: "Delivered", date: "2025-06-03" },
-  { id: 7, orderNo: "ORD007", customer: "Noah Martinez", status: "Pending", date: "2025-06-02" },
-  { id: 8, orderNo: "ORD008", customer: "Sophia Anderson", status: "Shipped", date: "2025-06-01" },
-  { id: 9, orderNo: "ORD009", customer: "Mason Thomas", status: "Delivered", date: "2025-05-31" },
-  { id: 10, orderNo: "ORD010", customer: "Isabella Taylor", status: "Shipped", date: "2025-05-30" },
-  { id: 11, orderNo: "ORD011", customer: "James Moore", status: "Pending", date: "2025-05-29" },
-  { id: 12, orderNo: "ORD012", customer: "Ava Jackson", status: "Shipped", date: "2025-05-28" },
-  { id: 13, orderNo: "ORD013", customer: "Logan White", status: "Delivered", date: "2025-05-27" },
-  { id: 14, orderNo: "ORD014", customer: "Mia Harris", status: "Pending", date: "2025-05-26" },
-  { id: 15, orderNo: "ORD015", customer: "Lucas Martin", status: "Shipped", date: "2025-05-25" },
-  { id: 16, orderNo: "ORD016", customer: "Charlotte Thompson", status: "Delivered", date: "2025-05-24" },
-  { id: 17, orderNo: "ORD017", customer: "Benjamin Garcia", status: "Pending", date: "2025-05-23" },
-  { id: 18, orderNo: "ORD018", customer: "Amelia Martinez", status: "Shipped", date: "2025-05-22" },
-  { id: 19, orderNo: "ORD019", customer: "Elijah Robinson", status: "Delivered", date: "2025-05-21" },
-  { id: 20, orderNo: "ORD020", customer: "Harper Clark", status: "Pending", date: "2025-05-20" },
+  { id: 1, orderNo: "ORD001", customer: "John Doe", status: "Shipped", date: "2025-06-08T10:15:00" },
+  { id: 2, orderNo: "ORD002", customer: "Alice Smith", status: "Pending", date: "2025-06-07T12:30:00" },
+  { id: 3, orderNo: "ORD003", customer: "Bob Johnson", status: "Delivered", date: "2025-06-06T09:45:00" },
+  { id: 4, orderNo: "ORD004", customer: "Emma Brown", status: "Pending", date: "2025-06-05T14:20:00" },
+  { id: 5, orderNo: "ORD005", customer: "Liam Davis", status: "Shipped", date: "2025-06-04T16:00:00" },
+  { id: 6, orderNo: "ORD006", customer: "Olivia Wilson", status: "Delivered", date: "2025-06-03T11:10:00" },
+  { id: 7, orderNo: "ORD007", customer: "Noah Martinez", status: "Pending", date: "2025-06-02T08:25:00" },
+  { id: 8, orderNo: "ORD008", customer: "Sophia Anderson", status: "Shipped", date: "2025-06-01T17:45:00" },
+  { id: 9, orderNo: "ORD009", customer: "Mason Thomas", status: "Delivered", date: "2025-05-31T13:50:00" },
+  { id: 10, orderNo: "ORD010", customer: "Isabella Taylor", status: "Shipped", date: "2025-05-30T10:05:00" },
+  { id: 11, orderNo: "ORD011", customer: "James Moore", status: "Pending", date: "2025-05-29T15:30:00" },
+  { id: 12, orderNo: "ORD012", customer: "Ava Jackson", status: "Shipped", date: "2025-05-28T09:00:00" },
+  { id: 13, orderNo: "ORD013", customer: "Logan White", status: "Delivered", date: "2025-05-27T12:40:00" },
+  { id: 14, orderNo: "ORD014", customer: "Mia Harris", status: "Pending", date: "2025-05-26T18:10:00" },
+  { id: 15, orderNo: "ORD015", customer: "Lucas Martin", status: "Shipped", date: "2025-05-25T11:25:00" },
+  { id: 16, orderNo: "ORD016", customer: "Charlotte Thompson", status: "Delivered", date: "2025-05-24T16:55:00" },
+  { id: 17, orderNo: "ORD017", customer: "Benjamin Garcia", status: "Pending", date: "2025-05-23T13:35:00" },
+  { id: 18, orderNo: "ORD018", customer: "Amelia Martinez", status: "Shipped", date: "2025-05-22T08:45:00" },
+  { id: 19, orderNo: "ORD019", customer: "Elijah Robinson", status: "Delivered", date: "2025-05-21T14:05:00" },
+  { id: 20, orderNo: "ORD020", customer: "Harper Clark", status: "Pending", date: "2025-05-20T17:20:00" },
 ];
+
 
 export default function OrdersList() {
   const [search, setSearch] = useState("");
@@ -33,19 +34,19 @@ export default function OrdersList() {
   );
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Orders List</h1>
-
-      <div className="mb-4">
+    <div className="w-full">
+      <div className="flex justify-between w-full">
+      <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Orders List</h1>
+      <div className="col-span-2 mb-4">
         <input
           type="text"
           placeholder="Search by Order No or Customer..."
-          className="w-full md:w-1/2 px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring"
+          className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-
+</div>
       <div className="overflow-x-auto bg-white shadow rounded">
         <table className="w-full table-auto border-collapse">
           <thead className="bg-gray-100 text-left text-sm uppercase text-gray-700">

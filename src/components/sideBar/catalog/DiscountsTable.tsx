@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 
 const discounts = [
   {
@@ -42,10 +43,27 @@ const getStatusBadge = (status: string) => {
 };
 
 export default function DiscountsTable() {
+    const [search, setSearch] = useState("");
+
+  const filteredOrders = discounts.filter((discount) =>
+    discount.code.toLowerCase().includes(search.toLowerCase()) ||
+    discount.status.toLowerCase().includes(search.toLowerCase()) ||
+    discount.type.toLowerCase().includes(search.toLowerCase())
+  );
   return (
-    <div className="p-6">
-           <h1 className="text-3xl font-bold mb-6">Discounts</h1>
-      <div className="bg-white border rounded-md shadow overflow-x-auto">
+    <div className="w-full">
+     <div className="flex justify-between w-full">
+      <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Discounts List</h1>
+      <div className="col-span-2 mb-4">
+        <input
+          type="text"
+          placeholder="Search by Code or Status..."
+          className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+</div>   <div className="bg-white border rounded-md shadow overflow-x-auto">
         <table className="min-w-full table-auto">
           <thead className="bg-gray-100 text-sm font-semibold text-left text-gray-700">
             <tr>
@@ -61,7 +79,8 @@ export default function DiscountsTable() {
             </tr>
           </thead>
           <tbody>
-            {discounts.map((d, index) => (
+               {filteredOrders.length ? (
+              filteredOrders.map((d, index) => (
               <tr key={index} className="border-t text-sm text-gray-800">
                 <td className="px-4 py-3 text-blue-600 font-medium hover:underline cursor-pointer">{d.code}</td>
                 <td className="px-4 py-3">{d.type}</td>
@@ -78,7 +97,14 @@ export default function DiscountsTable() {
                   </div>
                 </td>
               </tr>
-            ))}
+        ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="p-3 text-center text-gray-500">
+                  No Discount Codes found.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

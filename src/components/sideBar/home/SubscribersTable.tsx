@@ -1,5 +1,8 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
+
+
 
 const subscribers = [
   {
@@ -54,9 +57,27 @@ const subscribers = [
 ];
 
 export default function SubscribersTable() {
+ const [search, setSearch] = useState("");
+
+  const filteredOrders = subscribers.filter((sub) =>
+    sub.name.toLowerCase().includes(search.toLowerCase()) ||
+    sub.email.toLowerCase().includes(search.toLowerCase()) || 
+    sub.phone.toLowerCase().includes(search.toLowerCase())
+  );
   return (
-    <div className="p-6">
-           <h1 className="text-3xl font-bold mb-6">Subscribers</h1>
+    <div className="w-full">
+          <div className="flex justify-between w-full">
+      <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Subscribers List</h1>
+      <div className="col-span-2 mb-4">
+        <input
+          type="text"
+          placeholder="Search by Name or Email..."
+          className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+</div>
       <div className="bg-white border rounded shadow overflow-x-auto">
         <table className="min-w-full text-sm">
           <thead className="bg-gray-100 text-gray-700 text-left font-semibold">
@@ -70,7 +91,8 @@ export default function SubscribersTable() {
             </tr>
           </thead>
           <tbody>
-            {subscribers.map((s, idx) => (
+             {filteredOrders.length ? (
+              filteredOrders.map((s, idx) => (
               <tr key={idx} className={idx % 2 === 0 ? '' : 'bg-gray-50'}>
                 <td className="px-4 py-2">{s.name}</td>
                 <td className="px-4 py-2">{s.email}</td>
@@ -90,7 +112,14 @@ export default function SubscribersTable() {
                   </button>
                 </td>
               </tr>
-            ))}
+             ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="p-3 text-center text-gray-500">
+                  No Subscribers found.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

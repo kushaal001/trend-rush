@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 
 const brands = [
   { id: 1, name: 'Nike', slug:'nike', logo: 'https://logo.clearbit.com/nike.com' },
@@ -9,20 +10,36 @@ const brands = [
 ];
 
 export default function BrandsTable() {
+   const [search, setSearch] = useState("");
+  const filteredOrders = brands.filter((brand) =>
+    brand.name.toLowerCase().includes(search.toLowerCase())
+  );
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Brands List</h1>
+    <div className="w-full">
+            <div className="flex justify-between w-full">
+      <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Brands List</h1>
+      <div className="col-span-2 mb-4">
+        <input
+          type="text"
+          placeholder="Search by Brand Name..."
+          className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+</div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded-2xl overflow-hidden">
           <thead>
             <tr className="bg-gray-100 text-left">
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Logo</th>
               <th className="px-6 py-4 text-sm font-semibold text-gray-600">Brand Name</th>
               <th className="px-6 py-4 text-sm font-semibold text-gray-600">Slug</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Logo</th>
             </tr>
           </thead>
           <tbody>
-            {brands.map((brand) => (
+           {filteredOrders.length ? (
+              filteredOrders.map((brand) => (
               <tr key={brand.id} className="border-t hover:bg-gray-50">
                 <td className="px-6 py-4 text-gray-800 text-md">{brand.name}</td>
                 <td className="px-6 py-4 text-gray-800 text-md">{brand.slug}</td>
@@ -34,7 +51,14 @@ export default function BrandsTable() {
                   />
                 </td>
               </tr>
-            ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="p-3 text-center text-gray-500">
+                  No Brands found.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
