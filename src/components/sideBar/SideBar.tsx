@@ -15,6 +15,7 @@ import {
   FlaskConical,
   ScanBarcode,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const MenuItem = ({
   title,
@@ -31,37 +32,46 @@ const MenuItem = ({
     <div>
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center justify-between w-full px-4 py-2 hover:bg-gray-200 transition-colors`}
-      >
+    className={`${
+  open ? "bg-[#e4e8ee]" : "bg-[#f2f2f2]"
+} flex cursor-pointer items-center justify-between w-full px-4 py-3 border-t-[1px] hover:bg-gray-200 transition-colors`}
+ >
         <span className="flex items-center gap-2 text-sm font-medium">
           {icon}
           {title}
         </span>
         {open ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
       </button>
-      {open && <div className="pl-10 space-y-1">{children}</div>}
+      {open && <div className=" space-y-[1px]">{children}</div>}
     </div>
   );
 };
 
-const SidebarLink = ({ href, label }: { href: string; label: string }) => (
-  <Link
-    href={href}
-    className="block text-sm text-gray-700  py-1"
-  >
-    {label}
-  </Link>
-);
+
+const SidebarLink = ({ href, label }: { href: string; label: string }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
+  return (
+    <Link
+      href={href}
+      className={`block text-sm py-2 pl-10 px-2 w-full rounded 
+        ${isActive ? "bg-[#d3d8e0] font-medium text-gray-900" : "text-gray-700 hover:bg-gray-300"}
+      `}
+    >
+      {label}
+    </Link>
+  );
+};
 
 export default function Sidebar() {
   return (
-    <div className="w-64 h-screen bg-gray-100 border-r pt-4 overflow-y-auto">
-      <div className="text-xl font-bold text-center mb-6">TRENDRUSH</div>
-      <nav className="space-y-2">
+    <div className="w-64 h-screen bg-[#f2f2f2] border-r pt-4 overflow-y-auto">
+      <nav className=" mt-10">
 
         <MenuItem title="Home" icon={<ScanBarcode size={16} />}>
-          <SidebarLink href="/dashboard/catalog/orders" label="Orders" />
-          <SidebarLink href="/dashboard/catalog/subscribers" label="Subscribers" />
+          <SidebarLink href="/dashboard/home/orders" label="Orders" />
+          <SidebarLink href="/dashboard/home/subscribers" label="Subscribers" />
         </MenuItem>
 
         <MenuItem title="Catalog" icon={<Tags size={16} />}>

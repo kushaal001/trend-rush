@@ -57,19 +57,18 @@ export default function ProductsTable() {
 
   return (
     <div className="p-6">
-        <div className="flex justify-between">
-            <>
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Products List</h1>
-
-      <input
-        type="text"
-        placeholder="Search by name or category..."
-        className="mb-4 w-full md:w-1/2 px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-</>
-<Link href="/products/add"></Link>
+      <div className="flex justify-between w-full">
+      <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Products List</h1>
+      <div className="col-span-2 mb-4">
+        <input
+          type="text"
+          placeholder="Search by Name..."
+          className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Link href="/products/add"></Link>
+      </div>
 </div>
       <div className="overflow-x-auto bg-white shadow rounded-lg">
         <table className="w-full table-auto border-collapse">
