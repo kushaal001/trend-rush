@@ -13,7 +13,7 @@ export default function Login() {
 
     // Your login condition
     if (email === "nanimudhiraj001@gmail.com" && password === "Trendrush") {
-      router.push("/orders");
+      router.push("/dashboard/home/orders");
     } else {
       setError("Invalid email or password.");
     }
