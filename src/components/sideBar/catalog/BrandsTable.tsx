@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const brands = [
@@ -25,7 +26,12 @@ export default function BrandsTable() {
           className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        />
+        />      <Link
+  href="/dashboard/catalog/brands/add"
+  className="inline-block ml-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium text-sm px-4 py-1.5 rounded-md shadow-sm transition-colors duration-200"
+>
+  Add Brand
+</Link>
       </div>
 </div>
       <div className="overflow-x-auto">
