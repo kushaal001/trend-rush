@@ -89,7 +89,7 @@ export default function DiscountsTable() {
                {filteredOrders.length ? (
               filteredOrders.map((d, index) => (
               <tr key={index} className="border-t text-sm text-gray-800">
-                <td className="px-4 py-3 text-blue-600 font-medium hover:underline cursor-pointer">{d.code}</td>
+                <td className="px-4 py-3 text-gray-800 font-medium hover:underline cursor-pointer">{d.code}</td>
                 <td className="px-4 py-3">{d.type}</td>
                 <td className="px-4 py-3">{d.value}</td>
                 <td className="px-4 py-3">{d.used}/{d.limit}</td>

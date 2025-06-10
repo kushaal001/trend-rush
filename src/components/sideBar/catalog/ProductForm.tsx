@@ -1,4 +1,6 @@
 "use client";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 export default function ProductForm() {
@@ -29,7 +31,17 @@ export default function ProductForm() {
 
   return (
     <div className=" mx-auto bg-white p-6 rounded shadow">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Add Product</h2>
+                 <h2 className="flex justify-between text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-4">
+
+  <span>Add Product</span>
+    <Link
+    href="/dashboard/catalog/products"
+    className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded transition"
+  >
+    <ArrowLeft className="w-4 h-4 mr-1" />
+    Back
+  </Link>
+</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
 
         <div>

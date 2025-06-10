@@ -49,7 +49,7 @@ export default function VariantsTable() {
           {filteredOrders.length ? (
               filteredOrders.map((variant, index) => (
               <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-6 py-4 text-blue-600 font-medium">{variant.name}</td>
+                <td className="px-6 py-4 text-gray-800 font-medium">{variant.name}</td>
                 <td className="px-6 py-4 text-gray-800">{variant.options.join(', ')}</td>
                 <td className="px-6 py-4">
                   <button className="text-blue-600 border border-blue-500 px-3 py-1 rounded hover:bg-blue-50 transition">

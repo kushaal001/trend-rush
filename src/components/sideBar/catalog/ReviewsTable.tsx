@@ -52,7 +52,7 @@ export default function ReviewsTable() {
     review.email.toLowerCase().includes(search.toLowerCase())
   );
   return (
-    <div className="p-8">
+    <div className="">
      <div className="flex justify-between w-full">
       <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Reviews List</h1>
       <div className="col-span-2 mb-4">

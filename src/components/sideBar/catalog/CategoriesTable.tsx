@@ -97,7 +97,7 @@ export default function CategoriesTable() {
            {filteredOrders.length ? (
               filteredOrders.map((cat, index) => (
               <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                <td className="px-4 py-3 text-blue-600 font-medium">{cat.name}</td>
+                <td className="px-4 py-3 text-gray-800 font-medium">{cat.name}</td>
                 <td className="px-4 py-3 text-gray-800">{cat.url}</td>
                 <td className="px-4 py-3">
                   {cat.image ? (
