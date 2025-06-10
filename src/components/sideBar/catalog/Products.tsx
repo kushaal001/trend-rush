@@ -56,7 +56,7 @@ export default function ProductsTable() {
   );
 
   return (
-    <div className="p-6">
+    <div className="">
       <div className="flex justify-between w-full">
       <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Products List</h1>
       <div className="col-span-2 mb-4">
@@ -67,7 +67,13 @@ export default function ProductsTable() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Link href="/products/add"></Link>
+       <Link
+  href="/dashboard/catalog/products/add"
+  className="inline-block ml-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium text-sm px-4 py-1.5 rounded-md shadow-sm transition-colors duration-200"
+>
+  Add Product
+</Link>
+
       </div>
 </div>
       <div className="overflow-x-auto bg-white shadow rounded-lg">

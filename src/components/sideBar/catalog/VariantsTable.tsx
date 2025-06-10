@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const variants = [
@@ -27,6 +28,12 @@ export default function VariantsTable() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+              <Link
+  href="/dashboard/catalog/variants/add"
+  className="inline-block ml-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium text-sm px-4 py-1.5 rounded-md shadow-sm transition-colors duration-200"
+>
+  Add Variant
+</Link>
       </div>
 </div>
       <div className="bg-white shadow border rounded-md overflow-hidden">

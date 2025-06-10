@@ -28,7 +28,7 @@ export default function ProductForm() {
   };
 
   return (
-    <div className="w-[85%] mx-auto bg-white p-6 rounded shadow">
+    <div className=" mx-auto bg-white p-6 rounded shadow">
       <h2 className="text-xl font-bold mb-4 text-gray-800">Add Product</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -116,7 +116,7 @@ export default function ProductForm() {
 
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white font-semibold py-2 rounded hover:bg-indigo-700 transition"
+          className="w-max px-3 ml-auto bg-indigo-600 text-white font-semibold py-2 rounded hover:bg-indigo-700 transition"
         >
           Submit
         </button>
