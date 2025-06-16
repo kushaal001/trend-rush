@@ -1,7 +1,9 @@
 "use client";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Save, Trash2 } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
+import Select from "react-select/base";
+import ReactSelect from "react-select";
 
 export default function ProductForm() {
   const [product, setProduct] = useState({
@@ -27,6 +29,46 @@ export default function ProductForm() {
     e.preventDefault();
     console.log("Submitted Product:", product);
     // Submit logic here
+  };
+
+  const variantList = {
+  Colors: ["Blue", "Green", "Red", "Yellow"],
+  Material: ["Cotton", "Nylon", "Silk"],
+  Sizes: ["22 Inches", "32 Inches"],
+};
+
+const variantOptions = Object.keys(variantList).map((key) => ({
+  label: key,
+  value: key,
+}));
+const [variants, setVariants] = useState([
+    { name: "", options: [] as string[] },
+  ]);
+
+  const handleVariantChange = (index: number, selected: any) => {
+    const updated = [...variants];
+    updated[index].name = selected.value;
+    updated[index].options = [];
+    setVariants(updated);
+  };
+
+  const handleOptionsChange = (index: number, selected: any) => {
+    const updated = [...variants];
+    updated[index].options = selected.map((s: any) => s.value);
+    setVariants(updated);
+  };
+
+  const addVariant = () => {
+    setVariants([...variants, { name: "", options: [] }]);
+  };
+
+  const removeVariant = (index: number) => {
+    const updated = variants.filter((_, i) => i !== index);
+    setVariants(updated);
+  };
+
+  const saveVariant = (index: number) => {
+    console.log("Saved Variant:", variants[index]);
   };
 
   return (
@@ -89,6 +131,78 @@ export default function ProductForm() {
           </select>
         </div>
 </div>
+<div className="space-y-4">
+      {variants.map((variant, index) => (
+        <div
+          key={index}
+          className="flex items-start gap-4 p-4 border rounded-md"
+        >
+          <div className="w-1/4">
+            <label className="block mb-1 font-semibold text-sm">
+              Selected Variant
+            </label>
+          <ReactSelect
+  options={variantOptions}
+  value={
+    variant.name
+      ? { label: variant.name, value: variant.name }
+      : null
+  }
+  onChange={(val) => handleVariantChange(index, val)}
+/>
+
+          </div>
+
+          <div className="w-1/2">
+            <label className="block mb-1 font-semibold text-sm">Options</label>
+            <ReactSelect
+              isMulti
+              isDisabled={!variant.name}
+              options={
+                variant.name
+                  ? variantList[variant.name].map((opt:any) => ({
+                      label: opt,
+                      value: opt,
+                    }))
+                  : []
+              }
+              value={variant.options.map((opt) => ({
+                label: opt,
+                value: opt,
+              }))}
+              onChange={(val) => handleOptionsChange(index, val)}
+              placeholder="Select options"
+            />
+          </div>
+
+          <div className="flex items-center gap-2 mt-6">
+            <button
+              type="button"
+              onClick={() => saveVariant(index)}
+              className="border px-3 py-2 rounded text-gray-700 hover:bg-gray-100"
+            >
+              <Save size={16} />
+            </button>
+            <button
+              type="button"
+              onClick={() => removeVariant(index)}
+              className="border px-3 py-2 rounded text-red-600 border-red-500 hover:bg-red-50"
+            >
+              <Trash2 size={16} />
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <button
+        type="button"
+        onClick={addVariant}
+        className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700"
+      >
+        + Add Variant
+      </button>
+    </div>
+
         <div className="flex gap-4">
           <div className="w-1/2">
             <label className="block font-medium text-gray-700 mb-1">Price ($)</label>

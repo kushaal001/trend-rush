@@ -101,6 +101,7 @@ export default function Sidebar() {
           isOpen={!!openMenus["Home"]}
           onToggle={() => handleToggle("Home")}
         >
+           <SidebarLink href="/dashboard/home/dashboard" label="Dashboard" />
           <SidebarLink href="/dashboard/home/orders" label="Orders" />
           <SidebarLink href="/dashboard/home/subscribers" label="Subscribers" />
         </MenuItem>
