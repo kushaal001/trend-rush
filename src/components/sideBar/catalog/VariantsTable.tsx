@@ -42,7 +42,7 @@ export default function VariantsTable() {
             <tr>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Options</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
+              {/* <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -51,11 +51,11 @@ export default function VariantsTable() {
               <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                 <td className="px-6 py-4 text-gray-800 font-medium">{variant.name}</td>
                 <td className="px-6 py-4 text-gray-800">{variant.options.join(', ')}</td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   <button className="text-blue-600 border border-blue-500 px-3 py-1 rounded hover:bg-blue-50 transition">
                     Manage Option
                   </button>
-                </td>
+                </td> */}
               </tr>
            ))
             ) : (

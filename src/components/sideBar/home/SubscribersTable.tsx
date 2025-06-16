@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Filter, Pencil, Search, Trash2 } from 'lucide-react';
 
 
 
@@ -65,20 +65,27 @@ export default function SubscribersTable() {
     sub.phone.toLowerCase().includes(search.toLowerCase())
   );
   return (
-    <div className="w-full">
-          <div className="flex justify-between w-full">
-      <h1 className="col-span-1 text-2xl font-bold text-gray-800 mb-4">Subscribers List</h1>
-      <div className="col-span-2 mb-4">
-        <input
-          type="text"
-          placeholder="Search by Name or Email..."
-          className="w-full md:w-60 px-4 py-2 border text-xs rounded-sm shadow-sm focus:outline-none focus:ring"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+    <div className="w-full space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Orders Management</h2>
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search orders..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <Filter className="w-4 h-4" />
+            <span>Filter</span>
+          </button>
+        </div>
       </div>
-</div>
-      <div className="bg-white border rounded shadow overflow-x-auto">
+      <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
         <table className="min-w-full text-sm">
           <thead className="bg-gray-100 text-gray-700 text-left font-semibold">
             <tr>
@@ -87,7 +94,7 @@ export default function SubscribersTable() {
               <th className="px-4 py-3">Phone</th>
               <th className="px-4 py-3">Subscribed</th>
               <th className="px-4 py-3">Subscribed Date</th>
-              <th className="px-4 py-3">Actions</th>
+              {/* <th className="px-4 py-3">Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -103,14 +110,14 @@ export default function SubscribersTable() {
                   </span>
                 </td>
                 <td className="px-4 py-2">{s.date}</td>
-                <td className="px-4 py-2 flex gap-2">
+                {/* <td className="px-4 py-2 flex gap-2">
                   <button className="p-2 text-blue-600 border border-blue-400 rounded hover:bg-blue-50">
                     <Pencil size={16} />
                   </button>
                   <button className="p-2 text-red-600 border border-red-400 rounded hover:bg-red-50">
                     <Trash2 size={16} />
                   </button>
-                </td>
+                </td> */}
               </tr>
              ))
             ) : (
