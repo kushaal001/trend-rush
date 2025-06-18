@@ -103,101 +103,139 @@
 // }
 
 
+// "use client";
+// import React, { useState, useEffect } from "react";
+
+// const heroImages = [
+//   "/Nike.webp",
+//   "/MH_Home_Originals_Women_4cda210de5.webp",
+//   "/Nike2.webp",
+// ];
+
+// export default function HomePage() {
+//   const [index, setIndex] = useState(0);
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setIndex((prev) => (prev + 1) % heroImages.length);
+//     }, 3000);
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   return (
+//     <div className="space-y-10">
+//       {/* Hero Carousel */}
+//       <div className="w-full h-64 md:h-[500px] overflow-hidden relative">
+//         {heroImages.map((src, i) => (
+//           <img
+//             key={i}
+//             src={src}
+//             alt={`Slide ${i + 1}`}
+//             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+//               index === i ? "opacity-100" : "opacity-0"
+//             }`}
+//           />
+//         ))}
+//       </div>
+
+//       {/* Stores Near Me */}
+//       <section className="px-6 md:px-12">
+//         <h2 className="text-2xl font-semibold mb-4">Stores Near Me</h2>
+//         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+//           {["Nike", "Zara", "H&M", "Adidas"].map((store, i) => (
+//             <div
+//               key={i}
+//               className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition"
+//             >
+//               <h3 className="font-bold text-lg">{store}</h3>
+//               <p className="text-sm text-gray-500">2.5 km away</p>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+
+//       {/* Featured Products */}
+//       <section className="px-6 md:px-12">
+//         <h2 className="text-2xl font-semibold mb-4">Featured Products</h2>
+//         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+//           {[...Array(8)].map((_, i) => (
+//             <div
+//               key={i}
+//               className="bg-white border rounded-lg shadow hover:shadow-md transition"
+//             >
+//               <img
+//                 src={`/images/product${(i % 4) + 1}.jpg`}
+//                 alt={`Product ${i + 1}`}
+//                 className="w-full h-48 object-cover rounded-t"
+//               />
+//               <div className="p-3">
+//                 <h4 className="font-medium">Product {i + 1}</h4>
+//                 <p className="text-gray-500 text-sm">$ {(i + 1) * 10}</p>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+
+//       {/* Men, Women, Kids Categories */}
+//       <section className="px-6 md:px-12">
+//         <h2 className="text-2xl font-semibold mb-4">Shop by Category</h2>
+//         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+//           {["Men", "Women", "Kids"].map((label, i) => (
+//             <div
+//               key={i}
+//               className="relative group h-48 overflow-hidden rounded-lg"
+//             >
+//               <img
+//                 src={`/images/${label.toLowerCase()}.jpg`}
+//                 alt={label}
+//                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+//               />
+//               <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-bold text-2xl">
+//                 {label}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
+
+
 "use client";
-import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import React from "react";
 
-const heroImages = [
-  "/Nike.webp",
-  "/MH_Home_Originals_Women_4cda210de5.webp",
-  "/Nike2.webp",
-];
-
-export default function HomePage() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % heroImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
+export default function AdminLoginPage() {
   return (
-    <div className="space-y-10">
-      {/* Hero Carousel */}
-      <div className="w-full h-64 md:h-[500px] overflow-hidden relative">
-        {heroImages.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt={`Slide ${i + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-              index === i ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
-      </div>
+<div className="min-h-screen flex overflow-hidden items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-600 font-sans">
+  <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl px-8 py-10">
+    
 
-      {/* Stores Near Me */}
-      <section className="px-6 md:px-12">
-        <h2 className="text-2xl font-semibold mb-4">Stores Near Me</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {["Nike", "Zara", "H&M", "Adidas"].map((store, i) => (
-            <div
-              key={i}
-              className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition"
-            >
-              <h3 className="font-bold text-lg">{store}</h3>
-              <p className="text-sm text-gray-500">2.5 km away</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    {/* <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 via-teal-400 to-sky-400 rounded-t-2xl"></div> */}
 
-      {/* Featured Products */}
-      <section className="px-6 md:px-12">
-        <h2 className="text-2xl font-semibold mb-4">Featured Products</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-white border rounded-lg shadow hover:shadow-md transition"
-            >
-              <img
-                src={`/images/product${(i % 4) + 1}.jpg`}
-                alt={`Product ${i + 1}`}
-                className="w-full h-48 object-cover rounded-t"
-              />
-              <div className="p-3">
-                <h4 className="font-medium">Product {i + 1}</h4>
-                <p className="text-gray-500 text-sm">$ {(i + 1) * 10}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Men, Women, Kids Categories */}
-      <section className="px-6 md:px-12">
-        <h2 className="text-2xl font-semibold mb-4">Shop by Category</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {["Men", "Women", "Kids"].map((label, i) => (
-            <div
-              key={i}
-              className="relative group h-48 overflow-hidden rounded-lg"
-            >
-              <img
-                src={`/images/${label.toLowerCase()}.jpg`}
-                alt={label}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-bold text-2xl">
-                {label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+    <div className="text-center mb-8">
+      <h1 className="text-2xl font-bold text-gray-800">TrendRush</h1>
+      <p className="text-sm text-gray-500 mt-1">Admin Portal</p>
     </div>
+
+    <h2 className="text-lg font-semibold text-center text-gray-800 mb-6">Welcome Back</h2>
+<Link href="/login" >
+    <button className="w-full cursor-pointer py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold hover:shadow-lg transition mb-4">
+      Sign In to Admin Portal
+    </button>
+    </Link>
+<Link href="/sign-up/business-type">
+    <button className="w-full cursor-pointer py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition">
+      Register as New Merchant
+    </button>
+</Link>
+    <div className="mt-4 text-center">
+      <a href="#" className="text-sm text-indigo-500 underline hover:text-indigo-600">Forgot Password?</a>
+    </div>
+  </div>
+</div>
   );
 }

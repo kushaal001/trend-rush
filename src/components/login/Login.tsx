@@ -53,7 +53,7 @@ export default function Login() {
 
           <div className="flex items-center justify-between text-sm">
             <span className="text-gray-600">Don't have an account?</span>
-            <a href="/sign-up" className="text-indigo-500 hover:underline">
+            <a href="/sign-up/business-type" className="text-indigo-500 hover:underline">
               Register
             </a>
           </div>
