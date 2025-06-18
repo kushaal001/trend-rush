@@ -31,7 +31,7 @@ export default function SignUp() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-gray-600 mb-1">Full Name</label>
+            <label className="block text-gray-600 mb-1">Store Name</label>
             <input
               type="text"
               name="name"
@@ -39,7 +39,7 @@ export default function SignUp() {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="John Doe"
+              placeholder="Enter Store Name"
             />
           </div>
 
@@ -52,10 +52,21 @@ export default function SignUp() {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="you@example.com"
+              placeholder="Enter Email"
             />
           </div>
-
+          <div>
+            <label className="block text-gray-600 mb-1">Phone Number</label>
+            <input
+              type="number"
+              name="phone_number"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              placeholder="Enter Phone Number"
+            />
+          </div>
           <div>
             <label className="block text-gray-600 mb-1">Password</label>
             <input
@@ -65,23 +76,22 @@ export default function SignUp() {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="••••••••"
+              placeholder="Enter Password"
             />
           </div>
 
-          <div>
+         <div>
             <label className="block text-gray-600 mb-1">Confirm Password</label>
             <input
               type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
+              name="confirm_password"
+              value={formData.password}
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="••••••••"
+              placeholder="Confirm Password"
             />
-          </div>
-
+            </div>
           <button
             type="submit"
             className="w-full cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-xl transition"
