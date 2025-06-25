@@ -50,7 +50,7 @@ export default function OwnerInformation() {
 
             <button
               type="button"
-              onClick={() => router.back()}
+              onClick={() => router.push('/sign-up/business-information')}
               className="block cursor-pointer text-sm text-center text-indigo-600 underline mx-auto"
             >
               ← Back

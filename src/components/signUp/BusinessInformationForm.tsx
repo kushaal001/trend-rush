@@ -1,9 +1,65 @@
 "use client"
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import GenericForm, { FieldConfig } from "../GenericForm.tsx/GenericForm";
 
 export default function BusinessInformationForm() {
      const router = useRouter();
+      const [form, setForm] = useState({
+         businessName: "",
+         gstNumber: "",
+         storeAddress: "",
+         city: "",
+         phoneNumber: "",
+       });
+
+ const fields: FieldConfig[] = [
+    {
+      name: "businessName",
+      label: "Business Name",
+      type: "text",
+      required: true,
+    },
+     {
+      name: "gstNumber",
+      label: " GST Number",
+      type: "text",
+      required: true,
+      colSpan: 2,
+    }
+    ,
+     {
+      name: "storeAddress",
+      label: "Store Address",
+      type: "text",
+      required: true,
+      colSpan: 2,
+    },
+
+ { name: "city", label: "City", type: "select", required: true, options: [
+        { label: "Delhi", value: "delhi" },
+        { label: "Mumbai", value: "mumbai" },
+         { label: "Bangalore", value: "bangalore" },
+      ]
+    },
+    {
+      name: "phoneNumber",
+      label: "Phone Number",
+      type: "text",
+      required: true,
+      colSpan: 1,
+    },
+    
+  ];
+
+  const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      console.log("Form Submitted:", form);
+    };
+
+
+
+
   return (
     <div className="min-h-screen flex items-center py-12 justify-center bg-gradient-to-br from-indigo-400 to-purple-600 px-4">
       <div className="w-full max-w-md rounded-2xl  shadow-xl">
@@ -21,7 +77,17 @@ export default function BusinessInformationForm() {
           </div>
 
           {/* Form */}
-          <form className="space-y-4">
+
+            <GenericForm
+                  title="Add Discount"
+                  fields={fields}
+                  formData={form}
+                  setFormData={setForm}
+                  onSubmit={handleSubmit}
+                  showBackButton
+                  // onGenerateCode={handleGenerateCode}
+                />
+          {/* <form className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Business Name <span className="text-red-500">*</span>
@@ -78,16 +144,13 @@ export default function BusinessInformationForm() {
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-
-            {/* Buttons */}
-            <button
-              onClick={() => router.push('/sign-up/owner-information')}
-              type="submit"
-              className="w-full py-3 cursor-pointer rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold hover:shadow-lg transition"
+  <button
+              type="button"
+              onClick={() => router.push('/sign-up/owner-information')} // change as needed
+              className="w-full cursor-pointer py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold hover:shadow-lg transition"
             >
               Continue
             </button>
-
             <div className="text-center">
               <button
               onClick={() => router.push('/sign-up/business-type')}
@@ -97,7 +160,7 @@ export default function BusinessInformationForm() {
                 ← Back
               </button>
             </div>
-          </form>
+          </form> */}
         </div>
       </div>
     </div>

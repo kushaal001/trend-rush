@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 
 export interface FieldConfig {
   name: string;
   label: string;
-  type: "text" | "number" | "select" | "checkbox" | "date";
+  type: string;
   required?: boolean;
   options?: { label: string; value: string }[]; // only for select
   colSpan?: number; // grid column span
@@ -32,16 +32,60 @@ export default function GenericForm({
   onGenerateCode,
   showBackButton,
 }: GenericFormProps) {
+  const router = useRouter();
+  const [errors, setErrors] = useState<any>({});
+
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value, type, checked }:any = e.target;
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+     const field:any = fields.find((f) => f.name === name);
+    const errorMessage = validateField(field, value);
+    setErrors({ ...errors, [name]: errorMessage });
+    
   };
-const router = useRouter();
+
+
+
+  const validateField = (field:FieldConfig, value:string) => {
+  if (field.required && !value) {
+    return `${field.label} is required.`;
+  }
+  if (field.type === "email" && value) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      return "Invalid email address.";
+    }
+  }
+  // Add more custom validations as needed
+  return "";
+};
+
+const validationBeforeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors:any = {};
+    fields.forEach((field) => {
+      const errorMessage = validateField(field, formData[field.name] || "");
+      if (errorMessage) {
+        newErrors[field.name] = errorMessage;
+      }
+    });
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+       onSubmit(e)
+      console.log("Form Submitted Successfully!", formData);
+     
+    }
+  };
+
+
+  console.log(errors,"errors")
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
+    <form onSubmit={validationBeforeSubmit} className="space-y-6">
         <div className="flex justify-between">
       {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
 {showBackButton && (
@@ -60,7 +104,7 @@ const router = useRouter();
 
       <div className="grid grid-cols-2 gap-4">
         {fields.map((field) => {
-          const colSpan = field.colSpan || 6;
+          const colSpan = field.colSpan || 2;
 
           return (
             <div key={field.name} className={`col-span-${colSpan}`}>
@@ -101,6 +145,9 @@ const router = useRouter();
                   className="w-full border px-4 py-2 rounded"
                 />
               )}
+               {errors[field.name] && (
+            <p style={{ color: "red" }}>{errors[field.name]}sss</p>
+          )}
             </div>
           );
         })}
@@ -131,6 +178,7 @@ const router = useRouter();
         >
           Save
         </button>
+        
       </div>
     </form>
   );

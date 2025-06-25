@@ -347,12 +347,19 @@ export default function DiscountForm() {
       colSpan: 1,
     },
 
- { name: "brand", label: "Brand", type: "select", required: true, options: [
+ { name: "brand",
+   label: "Brand",
+    type: "select",
+     required: true,
+      colSpan: 1,
+      options: [
         { label: "H&M", value: "h&m" },
         { label: "Zudio", value: "zudio" },
       ]
+       
     },
-      { name: "category", label: "Category", type: "select", required: true, options: [
+      {
+         name: "category", label: "Category", type: "select", required: true, colSpan: 1, options: [
         { label: "Shirts", value: "shirts" },
         { label: "Piant", value: "piant" },
       ]
@@ -362,26 +369,30 @@ export default function DiscountForm() {
       name: "products",
       label: "Products",
       type: "select",
+       colSpan: 1,
       options: [
         { label: "Jeans", value: "jeans" },
         { label: "Denim Shirt", value: "denim-shirt" },
         { label: "Trouser", value: "trouser" },
       ],
     },
-        { name: "discountType", label: "Discount Type", type: "select", required: true, options: [
+        { name: "discountType", label: "Discount Type", type: "select", required: true,
+           colSpan: 1, options: [
         { label: "Percentage", value: "percentage" },
         { label: "Amount", value: "amount" },
         { label: "Buy1 Get 1", value: "buy1-get1" },
       ]
     },
-    { name: "discountValue", label: "Discount Value", type: "number" },
-    { name: "minCartValue", label: "Min Cart Value", type: "number" },
-    { name: "maxDiscountValue", label: "Max Discount Value", type: "number" },
+    { name: "discountValue", label: "Discount Value", type: "number", colSpan: 1 },
+    { name: "minCartValue", label: "Min Cart Value", type: "number" ,colSpan: 1},
+    { name: "maxDiscountValue", label: "Max Discount Value", type: "number" ,colSpan: 1},
     // { name: "maxUsesPerUser", label: "Max Uses/User", type: "number" },
-    { name: "startDate", label: "Start Date", type: "date" },
-    { name: "endDate", label: "End Date", type: "date" },
+    { name: "startDate", label: "Start Date", type: "date",colSpan: 1 },
+    { name: "endDate", label: "End Date", type: "date",colSpan: 1 },
     { name: "isActive", label: "Active", type: "checkbox" },
   ];
+
+
 
   const handleGenerateCode = () => {
     const code = Math.random().toString(36).substr(2, 8).toUpperCase();
