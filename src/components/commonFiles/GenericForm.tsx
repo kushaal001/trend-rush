@@ -70,6 +70,8 @@ export default function GenericForm<T extends Record<string, any>>({
         onSubmit(formData);
     };
 
+    
+
     return (
         <div className="p-6 bg-white rounded shadow max-w-xl mx-auto">
             <h2 className="text-2xl font-semibold mb-6">{title}</h2>
