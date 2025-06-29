@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 export interface FieldConfig {
   name: string;
   label: string;
+  placeholder:string;
   type: "text" | "number" | "select" | "checkbox" | "date";
   required?: boolean;
   options?: { label: string; value: string }[]; // only for select
@@ -97,7 +98,7 @@ const router = useRouter();
                   name={field.name}
                   value={formData[field.name] || ""}
                   onChange={handleChange}
-                  placeholder={field.label}
+                  placeholder={field.placeholder}
                   className="w-full border px-4 py-2 rounded"
                 />
               )}

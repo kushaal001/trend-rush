@@ -1,8 +1,26 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { apiUrls } from "@/utils/Api";
 
 export default function AdminLoginPage() {
+
+  useEffect(() => {
+    fetch(apiUrls.login, {
+      method: 'post',
+      headers: {
+      'Content-Type': 'application/json', // ✅ required to parse JSON on server
+      },
+      body: JSON.stringify({
+        email: 'manne.nikhil1996@gmail.com',
+        Phone: null,
+        name: null,
+        type: 'Retailer'
+      })
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => console.log(err, 'hello err'));
+  }, []);
   return (
 <div className="min-h-screen flex overflow-hidden items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-600 font-sans">
   <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl px-8 py-10">
