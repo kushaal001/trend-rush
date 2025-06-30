@@ -15,27 +15,47 @@ interface Props {
   onSuccess?: () => void;
 }
 
-export default function UserAuthVerifyForm({ userData, onSuccess }: Props) {
+export default function UserAuthVerifyForm() {
   const [code, setCode] = useState("");
 
-  const handleVerify = async (e: React.FormEvent) => {
+  // const handleVerify = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   if (!code) return alert("Please enter the OTP code.");
+
+  //   try {
+  //     const response = await axios.post("http://localhost:3000/user/auth/verify", {
+  //       ...userData,
+  //       code,
+  //     });
+
+  //     const res = response.data;
+  //     alert(`✅ Verification successful for ${res.data?.verifiedWith || userData.email || userData.phone}`);
+
+  //     if (onSuccess) onSuccess();
+  //   } catch (error: any) {
+  //     const errRes = error.response?.data;
+  //     alert(errRes?.message || "❌ Verification failed.");
+  //   }
+  // };
+
+    const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!code) return alert("Please enter the OTP code.");
-
     try {
       const response = await axios.post("http://localhost:3000/user/auth/verify", {
-        ...userData,
-        code,
+        email:"nanimudhiraj001@gmail.com",
+        code:code
       });
 
       const res = response.data;
-      alert(`✅ Verification successful for ${res.data?.verifiedWith || userData.email || userData.phone}`);
-
-      if (onSuccess) onSuccess();
+      alert(`✅ OTP sent to ${res.data.otpSentTo}`);
     } catch (error: any) {
       const errRes = error.response?.data;
-      alert(errRes?.message || "❌ Verification failed.");
+      if (errRes?.message) {
+        alert(`❌ ${errRes.message}`);
+      } else {
+        alert("❌ Something went wrong");
+      }
     }
   };
 
@@ -45,7 +65,7 @@ export default function UserAuthVerifyForm({ userData, onSuccess }: Props) {
         <div className="mb-6 text-center">
           <h2 className="text-2xl font-bold text-gray-800">Verify OTP</h2>
           <p className="text-gray-500 text-sm mt-1">
-            Enter the OTP sent to {userData.email || userData.phone}
+            Enter the OTP sent to 
           </p>
         </div>
 
