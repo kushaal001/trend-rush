@@ -51,12 +51,13 @@ const fields: FieldConfig[] = [
 
 
 async function handleSubmit(e: React.FormEvent) {
-  setSubmitLoader(true);
   e.preventDefault();
+  setSubmitLoader(true);
   setFieldErrors({});
 
   if (!formData.contact) {
     setFieldErrors({ contact: "Email or Phone is required" });
+    setSubmitLoader(false);
     return;
   }
 
@@ -70,7 +71,7 @@ async function handleSubmit(e: React.FormEvent) {
     type: formData.type,
   };
 
-  const { data, errors, status } :any= await axios
+  const { data, errors, status }: any = await axios
     .post("http://localhost:3000/user/auth/initiate", payload)
     .then((res) => ({ data: res.data }))
     .catch((err) => ({
@@ -79,7 +80,6 @@ async function handleSubmit(e: React.FormEvent) {
     }));
 
   if (data) {
-    setSubmitLoader(false)
     toast.success(`OTP sent to ${data.data.otpSentTo}`);
     setIsOtpSent(true);
   } else if (errors && typeof errors === "object") {
@@ -88,12 +88,17 @@ async function handleSubmit(e: React.FormEvent) {
       newErrors[err.field] = err.message;
     });
     setFieldErrors(newErrors);
+    toast.error(errors[0]?.message || "Something went wrong");
   } else if (status) {
     toast.error("Something went wrong");
   } else {
     console.error("Unexpected errors format:", errors);
+    toast.error("Unexpected error");
   }
+
+  setSubmitLoader(false);
 }
+
 
 
 async function handleVerify(e: React.FormEvent) {
@@ -145,6 +150,7 @@ async function handleVerify(e: React.FormEvent) {
         </div>
 
         {!isOtpSent ? (
+          <>
           <GenericForm
             title=""
             fields={fields}
@@ -153,14 +159,31 @@ async function handleVerify(e: React.FormEvent) {
             onSubmit={handleSubmit}
             showBackButton={false}
             gridCols={1}
-            showSaveButton={true}
+            showSaveButton={false}
             showCancelButton={false}
             errors={fieldErrors} // ✅ pass to GenericForm
           />
+            <button
+              type="submit"
+              className="w-full mt-4 cursor-pointer bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            >{submitLoader ? <Loader2 className="anmate-spin h-5 w-5"/> :
+              'Sign Up' }
+            </button>
+            {!isOtpSent && (
+          <div className="flex justify-between pt-1">
+            <p onClick={() =>router.push("/login")} className="w-full pt-1 flex text-[13px] text-purple-600 hover:text-purple-700 cursor-pointer rounded-lg font-medium text-gray-700 transition">
+              Already a user Login
+            </p>
+              <a href="#" className="flex w-full justify-end text-[13px] text-purple-600 hover:text-purple-700">
+                Forgot Password?
+              </a>
+          </div>
+        )}
+            </>
         ) : (
           <form onSubmit={handleVerify} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-[16px] font-bold text-black mb-1">
                 Enter OTP
               </label>
               <input
@@ -172,27 +195,21 @@ async function handleVerify(e: React.FormEvent) {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
+            <div>
             <button
               type="submit"
               className="w-full cursor-pointer bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition"
             >{submitLoader ? <Loader2 className="anmate-spin h-5 w-5"/> :
               'Verify OTP' }
             </button>
+            <button onClick={() => handleSubmit} className="flex items-center text-[13px] font-semibold justify-center gap-1">Didn't receive OTP? Resend
+                 
+              </button>
+            </div>
           </form>
         )}
 
-        {!isOtpSent && (
-          <>
-            <button onClick={() =>router.push("/login")} className="w-full cursor-pointer border border-gray-300 mt-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition">
-              Already a user SignIn
-            </button>
-            <div className="text-center mt-3">
-              <a href="#" className="text-sm text-purple-600 hover:underline">
-                Forgot Password?
-              </a>
-            </div>
-          </>
-        )}
+ 
       </div>
     </div>
   );
