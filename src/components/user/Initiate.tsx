@@ -70,6 +70,7 @@ async function handleSubmit(e: React.FormEvent) {
     name: formData.name || null,
     type: formData.type,
   };
+console.log('payload',payload);
 
   const { data, errors, status }: any = await axios
     .post("http://localhost:3000/user/auth/initiate", payload)
@@ -79,13 +80,16 @@ async function handleSubmit(e: React.FormEvent) {
       status: err.response?.status,
     }));
 
+    console.log('form', data, errors, status);
   if (data) {
     toast.success(`OTP sent to ${data.data.otpSentTo}`);
     setIsOtpSent(true);
+
   } else if (errors && typeof errors === "object") {
     const newErrors: Record<string, string> = {};
     errors.forEach((err: { field: string; message: string }) => {
       newErrors[err.field] = err.message;
+
     });
     setFieldErrors(newErrors);
     toast.error(errors[0]?.message || "Something went wrong");
@@ -165,6 +169,7 @@ async function handleVerify(e: React.FormEvent) {
           />
             <button
               type="submit"
+              onClick={handleSubmit}
               className="w-full mt-4 cursor-pointer bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition"
             >{submitLoader ? <Loader2 className="anmate-spin h-5 w-5"/> :
               'Sign Up' }
